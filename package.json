@@ -1,14 +1,18 @@
 {
-  "name": "typescript-dashboard",
+  "name": "controle-financeiro",
   "version": "1.0.0",
-  "description": "",
+  "description": "plataforma de controle financeiro.",
   "main": "index.js",
   "scripts": {
     "lint": "eslint ./ --fix",
     "dev": "tsx watch ./src/server.ts"
   },
   "keywords": [],
-  "author": "",
+  "author": {
+    "email": "sferreirajoaovictor@gmail.com",
+    "name": "João Ferreira",
+    "url": "https://github.com/Joaoferreiras"
+  },
   "license": "ISC",
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^7.0.1",
