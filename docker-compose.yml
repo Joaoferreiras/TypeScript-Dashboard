@@ -4,7 +4,7 @@ services:
   mongo:
     container_name: mongodb
     restart: always
-    image: mongo
+    image: mongo:4.4.6
     environment:
       MONGO_INITDB_ROOT_USERNAME: 'devfinances'
       MONGO_INITDB_ROOT_PASSWORD: '123abc'
