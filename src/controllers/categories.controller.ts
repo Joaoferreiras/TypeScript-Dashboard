@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
+import { z } from 'zod';
 
 import { CategoriesRepository } from '../database/repositories/categories.repository';
 import { CategoryModel } from '../database/schemas/category.schema';
@@ -12,6 +13,13 @@ export class CategoriesController {
     next: NextFunction,
   ) {
     try {
+      const validateSchema = z.object({
+        title: z.string(),
+        color: z.string().regex(/^#[A-Fa-f0-9]{6}$/),
+      });
+
+      validateSchema.parse(req.body);
+
       const { title, color } = req.body;
 
       const repository = new CategoriesRepository(CategoryModel);
