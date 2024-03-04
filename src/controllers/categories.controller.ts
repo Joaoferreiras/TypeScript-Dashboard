@@ -7,11 +7,11 @@ import { CategorieService } from '../services/categories.services';
 export class CategoriesController {
   constructor(private categoriesService: CategorieService) {}
 
-  async create(
+  create = async (
     req: Request<unknown, unknown, CreatedCategoryDTO>,
     res: Response,
     next: NextFunction,
-  ) {
+  ) => {
     try {
       const { title, color } = req.body;
 
@@ -21,9 +21,9 @@ export class CategoriesController {
     } catch (err) {
       next(err);
     }
-  }
+  };
 
-  async index(req: Request, res: Response, next: NextFunction) {
+  index = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const result = await this.categoriesService.index();
 
@@ -31,5 +31,5 @@ export class CategoriesController {
     } catch (err) {
       next(err);
     }
-  }
+  };
 }
