@@ -19,3 +19,5 @@ TransactionsRoutes.post(
   }),
   controller.create,
 );
+
+TransactionsRoutes.get('/', controller.index);
