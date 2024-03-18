@@ -1,4 +1,7 @@
-import { createTransactionDto } from '../../dtos/transactions.dto';
+import {
+  createTransactionDto,
+  indexTransactionsDto,
+} from '../../dtos/transactions.dto';
 import { Transaction } from '../../entities/transaction.entity';
 import { TransactionModel } from '../schemas/transactions.schema';
 
@@ -23,8 +26,25 @@ export class TransactionsRepository {
     return createdTrasaction.toObject<Transaction>();
   }
 
-  async index(): Promise<Transaction[]> {
-    const transactions = await this.model.find();
+  async index({
+    title,
+    categoryId,
+    beginDate,
+    endDate,
+  }: indexTransactionsDto): Promise<Transaction[]> {
+    const whereParams: Record<string, unknown> = {
+      ...(title && { title: { $regex: title, $options: 'i' } }),
+      ...(categoryId && { 'category._id': categoryId }),
+    };
+
+    if (beginDate || endDate) {
+      whereParams.date = {
+        ...(beginDate && { $gte: beginDate }),
+        ...(endDate && { $gte: endDate }),
+      };
+    }
+
+    const transactions = await this.model.find(whereParams);
 
     const transactionsMap = transactions.map((item) =>
       item.toObject<Transaction>(),
